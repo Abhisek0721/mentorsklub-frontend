@@ -46,7 +46,7 @@ function Signup() {
                  />
                  </div>
     <div className='text-center my-12 text-5xl font-semibold'><h1>Create an account</h1></div>
-    <form action="" className='rounded-sm min-w-[430px] bg-[var(--color-grey-100)] shadow-[var(--shadow-md)]'>
+    <form action="" className='rounded-sm min-w-[430px] bg-gray-100 shadow-[var(--shadow-md)]'>
         <div className='pt-12 px-12 '>
         <div className='flex flex-col  pt-5'>
             <label className='mb-2'>Full name</label>
