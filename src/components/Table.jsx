@@ -79,7 +79,7 @@ export default function MentorTable() {
                 ) : (
                   <button
                     onClick={handleSubscribed}
-                    className="bg-blue-500 py-4 text-xl font-semibold rounded-md border-none  uppercase tracking-[1px] text-white w-full focus:outline-none">
+                    className="w-full py-3 rounded-sm font-semibold bg-[var(--color-brand-500)] text-[var(--color-grey-0)] text-xl tracking-[1px]">
                     Subscribe
                   </button>
                 )}
