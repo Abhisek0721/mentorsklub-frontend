@@ -13,9 +13,9 @@ const Sidebar = () => {
   const { pathname } = useLocation();
 
   const active =
-    " flex text-purple-600 items-center  px-5 py-1 bg-purple-50 rounded-sm transition-all duration-200";
+    " flex  bg-gray-50 text-gray-800 items-center  py-[1.2rem] px-[2.4rem]  rounded-sm transition-all duration-200";
   const deactive =
-    " flex  items-center px-5 rounded-sm transition-all duration-200";
+    " flex  items-center py-[1.2rem] px-[2.4rem] rounded-sm transition-all duration-200";
 
   const paths = [
     {
@@ -70,27 +70,31 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="bg-white border-r border-gray-100 row-span-full flex my-10 items-center flex-col gap-8 p-6">
+    <div className="bg-white border-r border-gray-100 row-span-full flex my-10 items-center flex-col gap-4 p-6">
       <div className="flex flex-col gap-2 justify-center items-center">
         <NavLink to="/">
           <img src={Logo} alt="" className="w-[120px] h-full" />
         </NavLink>
       </div>
-      <div>
-        <ul className="flex flex-col my-10 gap-y-10">
+      <div className="w-full">
+        <ul className="flex flex-col my-10 gap-y-4">
           {paths?.map((path) => (
             <NavLink
               key={path.id}
               to={path.path}
-              className={` ${pathname === path.path ? active : deactive}`}>
-              <li className={`flex gap-4 items-center justify-center text-3xl`}>
+              className={` ${pathname === path.path ? active : deactive}`}
+            >
+              <li
+                className={`flex gap-4 items-center justify-center text-[1.4rem] font-medium`}
+              >
                 <span
                   className={`text-4xl ${
-                    pathname === path.path ? "text-purple-500" : "text-gray-400"
-                  }`}>
+                    pathname === path.path ? "text-[#4f46e5]" : "text-gray-400"
+                  }`}
+                >
                   {path.icon}
                 </span>
-                <span className="tracking-[1px]">{path.pathName}</span>
+                <span>{path.pathName}</span>
               </li>
             </NavLink>
           ))}
