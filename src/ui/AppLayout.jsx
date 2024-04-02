@@ -7,7 +7,6 @@ const AppLayout = () => {
     <div className="grid grid-cols-[20rem_1fr] grid-rows-[auto_1fr] h-screen">
       <Header />
       <Sidebar />
-
       <main className="bg-gray-50 p-10 pb-16">
         <Outlet />
       </main>
