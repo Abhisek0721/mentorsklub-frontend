@@ -15,21 +15,21 @@ const Sidebar = () => {
     " flex  items-center px-5 rounded-sm transition-all duration-200";
 
   return (
-    <div className="bg-white border-r border-gray-100 row-span-full flex justify-center items-center flex-col gap-8">
+    <div className="bg-white border-r border-gray-100 row-span-full flex justify-center items-center flex-col gap-8 p-6">
       <div className="flex flex-col gap-2 justify-center items-center">
-        <IoLogoAngular className="text-4xl" />
-        <p>Lorem ipsum dolor sit amet.</p>
+        <IoLogoAngular className="text-[100px]" />
+        <p>Lorem ipsum dolor </p>
       </div>
       <div>
-        <ul className="flex flex-col gap-5">
+        <ul className="flex flex-col gap-y-10">
           <NavLink
             to="/"
             className={` ${pathname === "/" ? active : deactive}`}>
-            <li className={`flex gap-1 items-center text-lg`}>
+            <li className={`flex gap-4 items-center text-3xl`}>
               <GoHome
                 className={` ${
                   pathname === "/" ? "text-purple-500" : "text-gray-400"
-                } text-2xl `}
+                } text-4xl `}
               />{" "}
               Home
             </li>
@@ -37,11 +37,11 @@ const Sidebar = () => {
           <NavLink
             to="/bookings"
             className={` ${pathname === "/bookings" ? active : deactive}`}>
-            <li className="flex gap-1 items- text-lg">
+            <li className="flex gap-4 items- text-3xl">
               <MdDateRange
                 className={` ${
                   pathname === "/bookings" ? "text-purple-500" : "text-gray-400"
-                } text-2xl `}
+                } text-4xl `}
               />{" "}
               Bookings
             </li>
@@ -49,23 +49,23 @@ const Sidebar = () => {
           <NavLink
             to="/cabins"
             className={` ${pathname === "/cabins" ? active : deactive}`}>
-            <li className="flex gap-1 items- text-lg">
+            <li className="flex gap-4 items- text-3xl">
               <LiaIndustrySolid
                 className={` ${
                   pathname === "/cabins" ? "text-purple-500" : "text-gray-400"
-                } text-2xl `}
-              />{" "}
+                } text-4xl `}
+              />
               Cabins
             </li>
           </NavLink>
           <NavLink
             to="/users"
             className={` ${pathname === "/users" ? active : deactive}`}>
-            <li className="flex gap-1 items- text-lg">
+            <li className="flex gap-4 items- text-3xl">
               <FiUsers
                 className={` ${
                   pathname === "/users" ? "text-purple-500" : "text-gray-400"
-                } text-2xl `}
+                } text-4xl `}
               />{" "}
               Users
             </li>
@@ -73,11 +73,11 @@ const Sidebar = () => {
           <NavLink
             to="/settings"
             className={` ${pathname === "/settings" ? active : deactive}`}>
-            <li className="flex gap-1 items- text-lg">
+            <li className="flex gap-4 items- text-3xl">
               <IoSettingsOutline
                 className={` ${
                   pathname === "/settings" ? "text-purple-500" : "text-gray-400"
-                } text-2xl `}
+                } text-4xl `}
               />{" "}
               Settings
             </li>
