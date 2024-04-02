@@ -14,8 +14,8 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path='profile' element={<Profile/>}/>
         </Route>
-        <Route path="login" element={<Login/>}/>
-        <Route path="signup" element={<Signup/>}/>
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
       </Routes>
       <Toaster
         position="top-center"
