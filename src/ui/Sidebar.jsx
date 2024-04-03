@@ -2,12 +2,12 @@ import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
 
 const Sidebar = () => {
   const { pathname } = useLocation();
@@ -57,15 +57,9 @@ const Sidebar = () => {
     },
     {
       id: 7,
-      pathName: "Ratings",
-      path: "/rationgs",
-      icon: <GradeOutlinedIcon fontSize="4xl" />,
-    },
-    {
-      id: 7,
-      pathName: "Feedback",
-      path: "/feedback",
-      icon: <FeedbackOutlinedIcon fontSize="4xl" />,
+      pathName: "Profile",
+      path: "/profile",
+      icon: <PersonPinIcon fontSize="4xl" />,
     },
   ];
 
@@ -82,16 +76,13 @@ const Sidebar = () => {
             <NavLink
               key={path.id}
               to={path.path}
-              className={` ${pathname === path.path ? active : deactive}`}
-            >
+              className={` ${pathname === path.path ? active : deactive}`}>
               <li
-                className={`flex gap-4 items-center justify-center text-[1.4rem] font-medium`}
-              >
+                className={`flex gap-4 items-center justify-center text-[1.4rem] font-medium`}>
                 <span
                   className={`text-4xl ${
                     pathname === path.path ? "text-[#4f46e5]" : "text-gray-400"
-                  }`}
-                >
+                  }`}>
                   {path.icon}
                 </span>
                 <span>{path.pathName}</span>
