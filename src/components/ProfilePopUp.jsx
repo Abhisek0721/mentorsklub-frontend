@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import toast, { Toaster } from "react-hot-toast";
+import Select from "react-select";
 
 const InputData = [
   {
@@ -24,13 +25,6 @@ const InputData = [
     placeholder: "enter mobile number",
     name: "mobileNumber",
   },
-  {
-    id: 4,
-    label: "Expert In",
-    type: "text",
-    placeholder: "enter expert in",
-    name: "expertIn",
-  },
 ];
 
 const ProfilePopUp = ({ handleShowProfilePopUP }) => {
@@ -41,11 +35,21 @@ const ProfilePopUp = ({ handleShowProfilePopUP }) => {
     expertIn: "",
   });
 
+  const [selectedOption, setSelectedOption] = useState(null);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (selectedOption) => {
+    setSelectedOption(selectedOption);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      expertIn: selectedOption.value,
     }));
   };
 
@@ -68,11 +72,29 @@ const ProfilePopUp = ({ handleShowProfilePopUP }) => {
     }
   };
 
+  const options = [
+    { value: "Programming", label: "Programming" },
+    { value: "Finance", label: "Finance" },
+    { value: "Business", label: "Business" },
+    { value: "Marketing", label: "Marketing" },
+    { value: "Design", label: "Design" },
+    { value: "Engineering", label: "Engineering" },
+    { value: "Health", label: "Health" },
+    { value: "Education", label: "Education" },
+    { value: "Science", label: "Science" },
+    { value: "Technology", label: "Technology" },
+    { value: "Arts", label: "Arts" },
+    { value: "Language", label: "Language" },
+    { value: "Music", label: "Music" },
+    { value: "Sports", label: "Sports" },
+    { value: "Other", label: "Other" },
+  ];
+
   return (
     <div className="bg-black w-full h-screen flex justify-center items-center bg-opacity-30">
       <Toaster />
 
-      <div className="w-[1000px] h-max  bg-white p-10 rounded-xl  shadow-md">
+      <div className="w-max xl:w-[1000px] h-max  bg-white p-10 rounded-xl  shadow-md">
         <div className="flex justify-between items-center my-5">
           <h1 className="text-4xl font-semibold ">Update Profile</h1>
           <div>
@@ -101,6 +123,17 @@ const ProfilePopUp = ({ handleShowProfilePopUP }) => {
                 />
               </div>
             ))}
+            <div className="flex flex-col gap-2">
+              <label htmlFor="options">
+                Expert In<span className="text-red-500">*</span>
+              </label>
+              <Select
+                options={options}
+                value={selectedOption}
+                onChange={handleSelectChange}
+                className="w-full"
+              />
+            </div>
           </div>
           <div className="mt-10">
             <button
