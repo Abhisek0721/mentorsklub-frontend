@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaGithub, FaLinkedin, FaToolbox } from 'react-icons/fa';
 import toast,{Toaster} from 'react-hot-toast';
+import { UploadButton } from '@bytescale/upload-widget-react';
 
 function Profile() {
   const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta voluptas architecto repellat ea autem a inventore numquam hic possimus praesentium excepturi corrupti neque similique minus recusandae, odio magnam illum delectus.';
@@ -24,16 +25,16 @@ function Profile() {
 
   const [profilePic, setProfilePic] = useState("https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg");
 
-  const handleProfilePicChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setProfilePic(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  }
+  // const handleProfilePicChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onloadend = () => {
+  //       setProfilePic(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // }
 
   const skills = ['tailwind', 'React js', 'Node js', 'Bootstrap', 'Redux'];
 
@@ -84,10 +85,15 @@ function Profile() {
     }
   ];
 
+  const options = {
+    apiKey: "free", // Get API key: https://www.bytescale.com/get-started
+    maxFileCount: 1
+  };
+
   return (
     <div className=" flex flex-col md:flex-row">
-      <div className="w-full md:w-1/4 p-6 flex justify-center md:block">
-      <label htmlFor="profilePicInput">
+      <div className="w-full min-w-[200px] md:w-1/4 p-6 flex flex-col justify-center items-center md:block">
+      {/* <label htmlFor="profilePicInput">
           <img
           src={profilePic}
           alt=""
@@ -102,8 +108,29 @@ function Profile() {
         accept="image/*"
         style={{ display: 'none' }}
         onChange={handleProfilePicChange}
-      />
+      /> */}
+
+<label htmlFor="profilePicInput">
+          <img
+          src={profilePic}
+          alt=""
+          className="w-[170px] h-[170px] object-cover rounded-[50%] md:w-[150px] md:h-[150px] "
+          style={{ cursor: 'pointer' }}
+        />
+        </label>
+<UploadButton options={options}
+                onComplete={files => {const link=(files.map(x => x.fileUrl).join("\n"))
+                setProfilePic(link)
+                }}>
+    {({onClick}) =>
+      <button onClick={onClick} className='button-style my-3 py-2 px-4 ml-2'>
+        Upload a file...
+      </button>
+    }
+  </UploadButton>
     </div>
+
+    
       <div className=" w-full p-6">
         <div>
           <h1 className="text-4xl md:text-6xl tracking-tight">{userabout.name}</h1>
@@ -138,15 +165,20 @@ function Profile() {
         </div>
 
         <div className="py-16">
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 text-[18px]">
-            {userinformation.map((item) => (
-              <li key={item.id} className="py-2">
-                <span className="pr-2 text-gray-400 font-medium">{item.name}</span>
-                <span className='pl-12'>{item.value}</span>
-              </li>
-            ))}
-          </ul>
+  <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 text-[18px]">
+    {userinformation.map((item) => (
+      <li key={item.id} className="py-2">
+        <div className="flex flex-wrap items-center">
+          <span className="pr-2 text-gray-400 font-medium">{item.name} : </span>
+          <span className='md:pl-12 pr-12'> 
+            {item.value}
+          </span>
         </div>
+      </li>
+    ))}
+  </ul>
+</div>
+
 
         <div className="h-[3px] bg-gray-200"></div>
 
