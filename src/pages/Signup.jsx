@@ -140,10 +140,6 @@ function Signup() {
               <button type="submit" className="button-style w-full">
                 Sign up
               </button>
-              <div className="mt-5">
-                <h1 className="text-gray-500">Already have an account ? 
-                <NavLink to='/login' className='px-4 signup'>Login</NavLink></h1>
-              </div>
             </div>
           </div>
         </form>
