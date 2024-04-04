@@ -1,6 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import logo from "../assets/logo-mentorklub.png";
+import { NavLink } from "react-router-dom";
 function Signup() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -146,10 +147,14 @@ function Signup() {
                 onChange={(e) => setcnfpassword(e.target.value)}
               />
             </div>
-            <div className="flex justify-center  py-16">
+            <div className="flex flex-col items-center justify-center  py-16">
               <button onClick={handlebtn} className="button-style w-full">
                 Sign up
               </button>
+              <div className="mt-5">
+                <h1 className="text-gray-500">Already have an account ? 
+                <NavLink to='/login' className='px-4 signup'>Login</NavLink></h1>
+              </div>
             </div>
           </div>
         </form>

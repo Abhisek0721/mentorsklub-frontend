@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaGithub, FaLinkedin, FaToolbox } from 'react-icons/fa';
-import toast,{Toaster} from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import { UploadButton } from '@bytescale/upload-widget-react';
 
 function Profile() {
@@ -8,33 +8,21 @@ function Profile() {
 
 
   const [subscribe, setsubscribe] = useState(true)
-  const handlesubscribe = () =>{
+  const handlesubscribe = () => {
     setsubscribe(!subscribe)
-    if(subscribe)
-    {
-      toast.success("Subscribe",{
-        duration:2000
+    if (subscribe) {
+      toast.success("Subscribe", {
+        duration: 2000
       })
     }
-    else{
-      toast.success("Unsubscribe",{
-        duration:2000
+    else {
+      toast.success("Unsubscribe", {
+        duration: 2000
       })
     }
   }
 
   const [profilePic, setProfilePic] = useState("https://www.svgrepo.com/show/384674/account-avatar-profile-user-11.svg");
-
-  // const handleProfilePicChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setProfilePic(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
 
   const skills = ['tailwind', 'React js', 'Node js', 'Bootstrap', 'Redux'];
 
@@ -72,7 +60,7 @@ function Profile() {
 
   const sociallink = [
     {
-      icon: <FaGithub/>,
+      icon: <FaGithub />,
       href: '#'
     },
     {
@@ -86,51 +74,41 @@ function Profile() {
   ];
 
   const options = {
-    apiKey: "free", // Get API key: https://www.bytescale.com/get-started
+    apiKey: "free", 
     maxFileCount: 1
   };
 
   return (
     <div className=" flex flex-col md:flex-row">
       <div className="w-full min-w-[200px] md:w-1/4 p-6 flex flex-col justify-center items-center md:block">
-      {/* <label htmlFor="profilePicInput">
+        <label htmlFor="profilePicInput">
           <img
-          src={profilePic}
-          alt=""
-          className="w-[170px] h-[170px] object-cover rounded-[50%] md:w-[150px] md:h-[150px] "
-          style={{ cursor: 'pointer' }}
-        />
-        
-      </label>
-      <input
-        type="file"
-        id="profilePicInput"
-        accept="image/*"
-        style={{ display: 'none' }}
-        onChange={handleProfilePicChange}
-      /> */}
-
-<label htmlFor="profilePicInput">
-          <img
-          src={profilePic}
-          alt=""
-          className="w-[170px] h-[170px] object-cover rounded-[50%] md:w-[150px] md:h-[150px] "
-          style={{ cursor: 'pointer' }}
-        />
+            src={profilePic}
+            alt=""
+            className="w-[170px] h-[170px] object-cover rounded-[50%] md:w-[150px] md:h-[150px] "
+            style={{ cursor: 'pointer' }}
+          />
         </label>
-<UploadButton options={options}
-                onComplete={files => {const link=(files.map(x => x.fileUrl).join("\n"))
-                setProfilePic(link)
-                }}>
-    {({onClick}) =>
-      <button onClick={onClick} className='button-style my-3 py-2 px-4 ml-2'>
-        Upload a file...
-      </button>
-    }
-  </UploadButton>
-    </div>
+        <UploadButton options={options}
+          onComplete={files => {
+            const link = (files.map(x => x.fileUrl).join("\n"))
+            if (link === '') {
+              setProfilePic(profilePic)
+            }
+            else {
+              setProfilePic(link)
+              toast.success("profile pic updated")
+            }
+          }}>
+          {({ onClick }) =>
+            <button onClick={onClick} className='button-style my-3 py-2 px-4 ml-2'>
+              Upload a file...
+            </button>
+          }
+        </UploadButton>
+      </div>
 
-    
+
       <div className=" w-full p-6">
         <div>
           <h1 className="text-4xl md:text-6xl tracking-tight">{userabout.name}</h1>
@@ -152,7 +130,7 @@ function Profile() {
         </div>
 
         <div className="flex flex-col md:flex-row gap-6 my-12">
-          <button className="button-style rounded-full flex items-center justify-center gap-2" onClick={handlesubscribe}>{subscribe? "Subscribe" : "Unsubscribe"}</button>
+          <button className="button-style rounded-full flex items-center justify-center gap-2" onClick={handlesubscribe}>{subscribe ? "Subscribe" : "Unsubscribe"}</button>
           <button className="button-style bg-red-600 rounded-full focus:outline-red-700">Message</button>
         </div>
 
@@ -165,19 +143,19 @@ function Profile() {
         </div>
 
         <div className="py-16">
-  <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 text-[18px]">
-    {userinformation.map((item) => (
-      <li key={item.id} className="py-2">
-        <div className="flex flex-wrap items-center">
-          <span className="pr-2 text-gray-400 font-medium">{item.name} : </span>
-          <span className='md:pl-12 pr-12'> 
-            {item.value}
-          </span>
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-5 text-[18px]">
+            {userinformation.map((item) => (
+              <li key={item.id} className="py-2">
+                <div className="flex flex-wrap items-center">
+                  <span className="pr-2 text-gray-400 font-medium">{item.name} : </span>
+                  <span className='md:pl-12 pr-12'>
+                    {item.value}
+                  </span>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </li>
-    ))}
-  </ul>
-</div>
 
 
         <div className="h-[3px] bg-gray-200"></div>

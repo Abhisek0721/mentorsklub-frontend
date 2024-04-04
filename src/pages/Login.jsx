@@ -1,5 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo-mentorklub.png";
+import { NavLink } from "react-router-dom";
+
 function Login() {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -43,10 +45,15 @@ function Login() {
                 onChange={(e) => setpassword(e.target.value)}
               />
             </div>
-            <div className="flex justify-center my-8 pb-5">
+            <div className="flex flex-col items-center justify-center my-8 pb-5">
               <button className="button-style w-full">Log in</button>
+              <div className="mt-5">
+                <h1 className="text-gray-500">Don't have an account yet ? 
+                <NavLink to='/signup' className='px-4 signup'>Signup</NavLink></h1>
+              </div>
             </div>
           </div>
+          
         </form>
       </main>
     </div>
