@@ -4,17 +4,26 @@ import { useUserSignInMutation } from "../redux/feature/auth/authApi";
 import toast from "react-hot-toast";
 import { useNavigate, NavLink } from "react-router-dom"; // Import NavLink from react-router-dom
 import Spinner from "../ui/Spinner";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../redux/feature/auth/authSlice";
 
 function Login() {
   const { register, handleSubmit } = useForm();
   const [loginFn, { isLoading }] = useUserSignInMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // handle submit
 
   const onSubmit = async (data) => {
     try {
       let response = await loginFn(data);
       if (response.data.data) {
+        localStorage.removeItem("token");
+
         localStorage.setItem("token", response.data.data.accessToken);
+        dispatch(setCredentials(response.data.data.accessToken));
+
         toast.success("login successfully", { duration: 5000 });
         navigate("/");
       }
