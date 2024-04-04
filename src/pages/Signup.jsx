@@ -7,7 +7,8 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../ui/Spinner";
 import { NavLink } from "react-router-dom";
-
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../redux/feature/auth/authSlice";
 function Signup() {
   const { register, handleSubmit } = useForm();
   const [signUpFn, { isLoading }] = useUserSignUpMutation();
@@ -15,7 +16,7 @@ function Signup() {
   const [button2Disabled, setButton2Disabled] = useState(false);
   const [role, setRole] = useState(null);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   // for toggle the role button
   const handleClick = (buttonClicked) => {
     if (buttonClicked === "button1") {
@@ -52,6 +53,7 @@ function Signup() {
 
         // Add the new token
         localStorage.setItem("token", response.data.data.accessToken);
+        dispatch(setCredentials(response.data.data.accessToken));
         toast.success("account creation successfully", { duration: 3000 });
       }
 
