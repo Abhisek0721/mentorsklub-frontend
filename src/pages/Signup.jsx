@@ -1,63 +1,69 @@
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import logo from "../assets/logo-mentorklub.png";
-import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useUserSignUpMutation } from "../redux/feature/auth/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import Spinner from "../ui/Spinner";
 function Signup() {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
-  const [name, setname] = useState("");
-  const [cnfpassword, setcnfpassword] = useState("");
+  const { register, handleSubmit } = useForm();
+  const [signUpFn, { isLoading }] = useUserSignUpMutation();
   const [button1Disabled, setButton1Disabled] = useState(false);
   const [button2Disabled, setButton2Disabled] = useState(false);
-  const [mapPosition, setMapPosition] = useState([40, 0]);
+  const [role, setRole] = useState(null);
+  const navigate = useNavigate();
+  // for toggle the role button
   const handleClick = (buttonClicked) => {
     if (buttonClicked === "button1") {
       console.log("Role: Mentor");
       setButton1Disabled(true);
       setButton2Disabled(false);
+      setRole({ role: "mentor" });
     } else if (buttonClicked === "button2") {
       console.log("Role: Mentee");
       setButton1Disabled(false);
       setButton2Disabled(true);
+      setRole({ role: "mentee" });
     }
   };
 
-  const handlebtn = (e) => {
-    e.preventDefault();
-    const regex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // handle accont create
+  const onSubmit = async (data) => {
+    if (!role) {
+      return toast.error("please select role", {
+        duration: 3000,
+      });
+    }
 
-    if (!button1Disabled && !button2Disabled) {
-      toast.error("Please select a role (Mentor or Mentee) to proceed.", {
-        duration: 5000,
+    let payload = {
+      ...data,
+      ...role,
+    };
+
+    try {
+      const response = await signUpFn(payload);
+
+      if (response.data.data) {
+        localStorage.setItem("token", response.data.data.accessToken);
+        toast.success("account creation successfully", {
+          duration: 3000,
+        });
+      }
+
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+
+      toast.error("email already exist", {
+        duration: 3000,
       });
-    } else if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address", {
-        duration: 5000,
-      });
-    } else if (regex.test(password)) {
-      toast.success("successfully create an account", {
-        duration: 2000,
-      });
-    } else if (password !== cnfpassword) {
-      toast.error("passord not match", {
-        duration: 5000,
-      });
-    } else if (email === "" || name === "") {
-      toast.error("kindly fill all the detail", {
-        duration: 5000,
-      });
-    } else {
-      toast.error(
-        "Password should contain at least one capital letter, one lowercase letter, one digit, and one special character.\nPlease try again.",
-        {
-          duration: 5000,
-        }
-      );
     }
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="border  flex justify-center w-screen h-screen items-center bg-gray-50">
       <Toaster />
@@ -68,7 +74,9 @@ function Signup() {
         <div className="text-center my-4 text-5xl font-semibold">
           <h1>Create an account</h1>
         </div>
+
         <form
+          onSubmit={handleSubmit(onSubmit)}
           action=""
           className="rounded-sm min-w-[48rem] bg-white shadow-[var(--shadow-md)]"
         >
@@ -102,9 +110,7 @@ function Signup() {
                 placeholder="enter your full name"
                 autoComplete="true"
                 className="input-style"
-                value={name}
-                required
-                onChange={(e) => setname(e.target.value)}
+                {...register("fullName", { required: true })}
               />
             </div>
             <div className="flex flex-col my-5 ">
@@ -116,9 +122,7 @@ function Signup() {
                 placeholder="demo@example.com"
                 autoComplete="true"
                 className="input-style"
-                required
-                value={email}
-                onChange={(e) => setemail(e.target.value)}
+                {...register("email", { required: true })}
               />
             </div>
             <div className="flex flex-col">
@@ -128,27 +132,12 @@ function Signup() {
                 placeholder="enter your password"
                 autoComplete="true"
                 className="input-style"
-                required
-                value={password}
-                onChange={(e) => setpassword(e.target.value)}
+                {...register("password", { required: true })}
               />
             </div>
-            <div className="flex flex-col pt-5">
-              <label className="mb-2 font-medium text-[1.4rem]">
-                Repeat password
-              </label>
-              <input
-                type="password"
-                placeholder="enter your password"
-                autoComplete="true"
-                className="input-style"
-                required
-                value={cnfpassword}
-                onChange={(e) => setcnfpassword(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col items-center justify-center  py-16">
-              <button onClick={handlebtn} className="button-style w-full">
+
+            <div className="flex justify-center  py-16">
+              <button type="submit" className="button-style w-full">
                 Sign up
               </button>
               <div className="mt-5">
@@ -158,24 +147,6 @@ function Signup() {
             </div>
           </div>
         </form>
-        {/* <div className={styles.mapContainer}>
-          <MapContainer
-            className={styles.map}
-            center={mapPosition}
-            zoom={13}
-            scrollWheelZoom={false}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={mapPosition}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </MapContainer>
-        </div> */}
       </main>
     </div>
   );
