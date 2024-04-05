@@ -12,9 +12,12 @@ import MenteeSession from "./pages/MenteeSession";
 import MentorSession from "./pages/MentorSession";
 import Mentee from "./pages/Mentee";
 import Mentor from "./pages/Mentor";
+
 function App() {
   const userInfo = useSelector((state) => state.auth.userInfo);
-  console.log(userInfo);
+  const userRole = userInfo?.userData?.role;
+  console.log(userRole, "infor");
+
   return (
     <BrowserRouter>
       <Routes>
@@ -23,23 +26,14 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
 
-            {userInfo?.userData?.role === "mentor" ? (
-              <>
-                <Route path="profile" element={<Profile />} />
-                <Route path="session" element={<MentorSession />} />
-              </>
-            ) : (
-              <>
-                <Route path="profile" element={<MeneeProfile />} />
-                <Route path="mentee" element={<Mentee />} />
-                <Route path="mentor" element={<Mentor />} />
+            <Route path="session" element={<MentorSession />} />
 
-                <Route path="session" element={<MenteeSession />} />
-              </>
-            )}
+            <Route path="profile" element={<MeneeProfile />} />
+            <Route path="mentee" element={<Mentee />} />
+            <Route path="mentor" element={<Mentor />} />
+            <Route path="session" element={<MenteeSession />} />
           </Route>
         </Route>
-
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
       </Routes>
