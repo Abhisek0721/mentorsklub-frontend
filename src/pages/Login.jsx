@@ -18,12 +18,18 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       let response = await loginFn(data);
-      if(response.error) {
+      if (response.error) {
         const message = response.error?.data?.errors;
         return toast.error(message);
       }
       if (response.data.data) {
+        localStorage.removeItem("userInfo");
+
+        // Add the new token
+        localStorage.setItem("userInfo", JSON.stringify(response.data.data));
         dispatch(setCredentials(response.data.data));
+        // toast.success("account creation successfully", { duration: 3000 });
+
         toast.success("login successfully", { duration: 5000 });
         navigate("/");
       }

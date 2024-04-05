@@ -5,10 +5,21 @@ import AppLayout from "./ui/AppLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
-import Viewpage from "./pages/Viewpage"
-import Session from "./pages/Sessionpage"
+import Viewpage from "./pages/Viewpage";
+import Session from "./pages/Sessionpage";
 import PrivateRoute from "./pages/ProtectedRoute";
+import { useSelector } from "react-redux";
+import MenteeSession from "./pages/MenteeSession";
+import MentorSession from "./pages/MentorSession";
+import Mentee from "./pages/Mentee";
+import Mentor from "./pages/Mentor";
+import MenteProfile from "./pages/MenteeProfile";
+
 function App() {
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const userRole = userInfo?.userData?.role;
+  console.log(userRole, "infor");
+
   return (
     <BrowserRouter>
       <Routes>
@@ -16,12 +27,17 @@ function App() {
           <Route element={<AppLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="sessions" element={<Session/>}/>
-            <Route path="viewprofile" element={<Viewpage/>}/>
+            <Route path="session" element={<MentorSession />} />
+            <Route path="profile" element={<MenteProfile />}>
+              <Route path="mentee" element={<Mentee />} />
+              <Route path="mentor" element={<Mentor />} />
+              <Route path="session" element={<MenteeSession />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="sessions" element={<Session />} />
+              <Route path="viewprofile" element={<Viewpage />} />
+            </Route>
           </Route>
         </Route>
-
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
       </Routes>

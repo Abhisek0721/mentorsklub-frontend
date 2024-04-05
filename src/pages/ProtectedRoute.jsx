@@ -3,7 +3,7 @@ import { Navigate, useLocation, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const userInfo = useSelector((state) => state.auth.userInfo);
-
+  console.log(userInfo);
   let location = useLocation();
 
   if (!userInfo) {
