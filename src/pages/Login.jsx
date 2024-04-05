@@ -18,17 +18,17 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       let response = await loginFn(data);
+      if(response.error) {
+        const message = response.error?.data?.errors;
+        return toast.error(message);
+      }
       if (response.data.data) {
-        localStorage.removeItem("token");
-
-        localStorage.setItem("token", response.data.data.accessToken);
-        dispatch(setCredentials(response.data.data.accessToken));
-
+        dispatch(setCredentials(response.data.data));
         toast.success("login successfully", { duration: 5000 });
         navigate("/");
       }
     } catch (err) {
-      toast.error("something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
