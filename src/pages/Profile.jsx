@@ -4,9 +4,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { UploadButton } from '@bytescale/upload-widget-react';
 
 function Profile() {
-  const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta voluptas architecto repellat ea autem a inventore numquam hic possimus praesentium excepturi corrupti neque similique minus recusandae, odio magnam illum delectus.';
-
-
+  const lorem="Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit repellat incidunt temporibus delectus, itaque hic eligendi voluptatem cumque, saepe odio eum dolor ipsam debitis dignissimos quaerat harum blanditiis, tempore sapiente."
   const [subscribe, setsubscribe] = useState(true)
   const handlesubscribe = () => {
     setsubscribe(!subscribe)
