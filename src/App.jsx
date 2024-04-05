@@ -5,15 +5,19 @@ import AppLayout from "./ui/AppLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import PrivateRoute from "./pages/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<AppLayout />}>
-          <Route index element={<Dashboard />} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="profile" element={<Profile />} />
+        <Route element={<PrivateRoute />}>
+          <Route element={<AppLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
         </Route>
+
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
       </Routes>
