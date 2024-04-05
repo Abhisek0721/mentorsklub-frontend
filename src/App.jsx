@@ -5,6 +5,8 @@ import AppLayout from "./ui/AppLayout";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/Profile";
+import Viewpage from "./pages/Viewpage"
+import Session from "./pages/Sessionpage"
 import PrivateRoute from "./pages/ProtectedRoute";
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="sessions" element={<Session/>}/>
+            <Route path="viewprofile" element={<Viewpage/>}/>
           </Route>
         </Route>
 
