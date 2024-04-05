@@ -49,11 +49,11 @@ function Signup() {
       const response = await signUpFn(payload);
 
       if (response.data.data) {
-        localStorage.removeItem("token");
+        localStorage.removeItem("userInfo");
 
         // Add the new token
-        localStorage.setItem("token", response.data.data.accessToken);
-        dispatch(setCredentials(response.data.data.accessToken));
+        localStorage.setItem("userInfo", JSON.stringify(response.data.data));
+        dispatch(setCredentials(response.data.data));
         toast.success("account creation successfully", { duration: 3000 });
       }
 
