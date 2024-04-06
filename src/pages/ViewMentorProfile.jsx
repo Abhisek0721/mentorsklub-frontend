@@ -3,7 +3,7 @@ import { FaGithub, FaLinkedin, FaToolbox } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { useProfileMutation } from "../redux/feature/profileApi/profileApi";
 
-const Profile = () => {
+const ViewMentorProfile = () => {
   const lorem =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta voluptas architecto repellat ea autem a inventore numquam hic possimus praesentium excepturi corrupti neque similique minus recusandae, odio magnam illum delectus.";
 
@@ -187,4 +187,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ViewMentorProfile;

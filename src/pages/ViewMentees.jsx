@@ -1,4 +1,4 @@
-const Mentee = () => {
+const ViewMentees = () => {
   return (
     <div>
       <h1>mentee</h1>
@@ -6,4 +6,4 @@ const Mentee = () => {
   );
 };
 
-export default Mentee;
+export default ViewMentees;

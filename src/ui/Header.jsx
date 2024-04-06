@@ -23,7 +23,7 @@ const Header = () => {
           className="w-[2.2rem] h-[2.2rem] cursor-pointer"
           src={profile}
           alt=""
-          onClick={() => navigate(`/${getUserRole()}-profile`)}
+          onClick={() => navigate(`/${getUserRole()}`)}
         />
         <img
           className="w-[2.2rem] h-[2.2rem] cursor-pointer"
