@@ -1,14 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
 import Logo from "../assets/logo.jpg";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import ClassOutlinedIcon from "@mui/icons-material/ClassOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import { useSelector } from "react-redux";
+
 
 const Sidebar = () => {
   const { pathname } = useLocation();
@@ -22,10 +21,10 @@ const Sidebar = () => {
 
   const mentorPaths = [
     {
-      id: 1,
-      pathName: "Mentor",
-      path: "/",
-      icon: <AccountCircleOutlinedIcon fontSize="4xl" />,
+      id: 6,
+      pathName: "Sessions",
+      path: "/sessions", // mentor can create session and view his own upcoming sessions
+      icon: <ClassOutlinedIcon fontSize="4xl" />,
     },
     {
       id: 3,
@@ -40,12 +39,6 @@ const Sidebar = () => {
       icon: <TextsmsOutlinedIcon fontSize="4xl" />,
     },
     {
-      id: 6,
-      pathName: "Sessions",
-      path: "/sessions", // mentor can create session and view his own upcoming sessions
-      icon: <ClassOutlinedIcon fontSize="4xl" />,
-    },
-    {
       id: 4,
       pathName: "Notification",
       path: "/notifications",
@@ -53,7 +46,7 @@ const Sidebar = () => {
     },
     {
       id: 7,
-      pathName: "MentorProfile",
+      pathName: "Profile",
       path: "/mentor-profile", // mentor can view and edit his own profile
       icon: <PersonPinIcon fontSize="4xl" />,
     },
