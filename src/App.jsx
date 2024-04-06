@@ -18,6 +18,7 @@ import SubscriptionForMentor from "./pages/SubscriptionForMentor";
 import SubscriptionForMentee from "./pages/SubscriptionForMentee";
 import UserNotification from "./pages/UserNotification";
 import UserMessage from "./pages/Message";
+import ZoomVerificationStatus from "./pages/ZoomAuthVerification";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute />}>
+          <Route path="zoomAuthorized" element={<ZoomVerificationStatus />} />
           <Route element={<AppLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
