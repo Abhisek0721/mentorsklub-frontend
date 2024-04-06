@@ -1,46 +1,54 @@
-import { useEffect, useState } from "react";
-import MentorTable from "../components/Table";
-import toast from "react-hot-toast";
+import React, { useState, useEffect } from "react";
+import { Dialog, DialogTitle, DialogContent, Button } from "@mui/material";
 import { getUserRole } from "../utils/getUserDataFromBrowser";
-import { useZoomAuthMutation, useZoomAuthStatusMutation } from "../redux/feature/mentor/mentorUser";
+import MentorUserApi from "../redux/feature/mentor/mentorUser";
+import MentorTable from "../components/Table";
 
 const Dashboard = () => {
-  // const userRole = getUserRole();
-  // const [checkZoomStatusApi, {isLoading}] = useZoomAuthStatusMutation();
-  // const [getZoomAuthUri, {isloading}] = useZoomAuthMutation();
+  const userRole = getUserRole();
+  const [showConnectPrompt, setShowConnectPrompt] = useState(false);
 
-  // const checkZoomStatusFn = async () => {
-  //   try {
-  //     let response = await checkZoomStatusApi();
-  //     if (response.error) {
-  //       const message = response.error?.data?.errors;
-  //       return toast.error(message);
-  //     }
-  //     console.log("checkZoomStatus", response.data?.data);
-  //     if (response.data?.data) {
-  //       const status = response.data?.data?.status;
-  //       if(!status) {
-  //         response = await getZoomAuthUri();
-  //         console.log("checkZoomStatus", response.data?.data);
-  //         window.open(response?.data.data?.authorizeUrl, '_blank');
-  //       }
-  //     }
-  //   } catch (error) {
-  //     toast.error("Something went wrong");
-  //   }
-  // }
+  const checkZoomStatusFn = async () => {
+    try {
+      let data = await MentorUserApi.checkZoomAuthStatus();
+      if (data?.data) {
+        setShowConnectPrompt(data?.data?.status);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
 
-  // useEffect(() => {
-  //   if(userRole === 'mentor') {
-  //     checkZoomStatusFn();
-  //   }
-  // }, []);
+  const handleConnectToZoom = async () => {
+    const data = await MentorUserApi.getZoomAuthUri();
+    window.open(data.data?.authorizeUrl, "_blank");
+    setShowConnectPrompt(false);
+  };
+
+  useEffect(() => {
+    if (userRole === "mentor") {
+      checkZoomStatusFn();
+    }
+  }, []);
 
   return (
     <div>
       <div className="heading1">
         <MentorTable />
       </div>
+      <Dialog
+        open={showConnectPrompt}
+        onClose={() => setShowConnectPrompt(false)}
+      >
+        <DialogTitle sx={{ fontSize: "2rem" }}>
+          You are not authorized to Zoom
+        </DialogTitle>
+        <DialogContent>
+          <Button onClick={handleConnectToZoom} sx={{ fontSize: "1.5rem" }}>
+            Connect to Zoom
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
