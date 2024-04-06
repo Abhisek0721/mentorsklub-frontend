@@ -1,7 +1,18 @@
+import SessionTableOfMentor from "../components/SessionTableOfMentor";
+
 const MentorSession = () => {
   return (
-    <div>
-      <h1>MentorSession</h1>
+    <div className="heading1">
+      <div>
+        <button
+          type="button"
+          // onClick={handleShowProfilePopUP}
+          className="button-style"
+        >
+          Create Session
+        </button>
+      </div>
+      <SessionTableOfMentor />
     </div>
   );
 };
