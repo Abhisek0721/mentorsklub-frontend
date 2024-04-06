@@ -66,7 +66,7 @@ const Sidebar = () => {
       path: "/view-mentees", // mentee can see other mentees
       icon: <PeopleOutlineOutlinedIcon fontSize="4xl" />,
     },
-        {
+    {
       id: 2,
       pathName: "Mentor",
       path: "/view-mentors", // mentee can see other mentors

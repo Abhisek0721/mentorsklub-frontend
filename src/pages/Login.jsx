@@ -18,6 +18,10 @@ function Login() {
   const onSubmit = async (data) => {
     try {
       let response = await loginFn(data);
+      if (response.error) {
+        const message = response.error?.data?.errors;
+        return toast.error(message);
+      }
       if (response.data.data) {
         localStorage.removeItem("userInfo");
 
@@ -30,7 +34,7 @@ function Login() {
         navigate("/");
       }
     } catch (err) {
-      toast.error("something went wrong");
+      toast.error("Something went wrong");
     }
   };
 
