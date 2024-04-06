@@ -16,18 +16,8 @@ import {
 } from "../utils/tableUtils";
 
 const SessionTableOfMentor = () => {
-  const [subscribe, setSubscribe] = useState(false);
   const [mentorSessions, setMentorSessions] = useState(null);
   const [pageData, setPageData] = useState(null);
-
-  const handleSubscribed = () => {
-    setSubscribe(!subscribe);
-    if (subscribe) {
-      toast.success("Un-Subscribed");
-    } else {
-      toast.success("Subscribed");
-    }
-  };
 
   const getAllSessionsOfMentor = async () => {
     const data = await SessionApi.getSessionsOfMentor();
@@ -79,7 +69,7 @@ const SessionTableOfMentor = () => {
                     key={eachSession?._id}
                   >
                     <TableCell align="left">
-                      <span className="text-3xl">
+                      <span className="text-3xl text-wrap">
                         {truncateString(eachSession?.meetingTopic)}
                       </span>
                     </TableCell>

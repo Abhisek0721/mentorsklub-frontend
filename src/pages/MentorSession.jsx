@@ -1,16 +1,11 @@
+import CreateMeetingModal from "../components/CreateMeeting";
 import SessionTableOfMentor from "../components/SessionTableOfMentor";
 
 const MentorSession = () => {
   return (
     <div className="heading1">
       <div>
-        <button
-          type="button"
-          // onClick={handleShowProfilePopUP}
-          className="button-style"
-        >
-          Create Session
-        </button>
+        <CreateMeetingModal />
       </div>
       <SessionTableOfMentor />
     </div>
