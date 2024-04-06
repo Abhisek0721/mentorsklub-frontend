@@ -31,6 +31,10 @@ const SessionTableOfMentor = () => {
     getAllSessionsOfMentor();
   }, []);
 
+  const handleSessionJoin = (meetingLink) => {
+    window.open(meetingLink, "_blank");
+  }
+
   return (
     <div className="max-w-full overflow-auto mt-10">
       <div>
@@ -94,8 +98,8 @@ const SessionTableOfMentor = () => {
                         eachSession?.endTime
                       ) ? (
                         <button
-                          // onClick={handleSessionJoin}
-                          className="w-full py-3 rounded-sm font-semibold bg-[var(--color-brand-500)] text-[var(--color-grey-0)] text-xl tracking-[1px]"
+                          onClick={() => handleSessionJoin(eachSession?.meetingLink)}
+                          className="w-28 py-3 rounded-sm font-semibold bg-[var(--color-brand-500)] text-[var(--color-grey-0)] text-xl tracking-[1px]"
                         >
                           Join
                         </button>
