@@ -1,23 +1,31 @@
 import { getAuthorizationString } from "../../../utils/getAuthorizationString";
-import { apiSlice } from "../../api/apiSlice";
+import axios from "axios";
+import constant from "../../../constants";
 
-export const mentorUserApi = apiSlice.injectEndpoints({
-  endpoints: (builder) => ({
-    checkZoomAuthStatus: builder.mutation({
-      query: () => ({
-        url: "/api/mentor/user/getZoomAuthStatus",
-        method: "GET",
-        headers: getAuthorizationString
-      }),
-    }),
-    getZoomAuthUri: builder.mutation({
-      query: () => ({
-        url: "/api/zoom/oauth/authorize",
-        method: "GET",
-        headers: getAuthorizationString
-      }),
-    }),
-  }),
-});
+class MentorUserApi {
+  static async checkZoomAuthStatus() {
+    const response = await axios.get(
+      `${constant.SERVER_URL}/api/mentor/user/getZoomAuthStatus`,
+      {
+        headers: {
+          Authorization: getAuthorizationString(),
+        },
+      }
+    );
+    return response.data;
+  }
 
-export const { useZoomAuthStatusMutation, useZoomAuthMutation } = mentorUserApi;
+  static async getZoomAuthUri() {
+    const response = await axios.get(
+      `${constant.SERVER_URL}/api/zoom/oauth/authorize`,
+      {
+        headers: {
+          Authorization: getAuthorizationString(),
+        },
+      }
+    );
+    return response.data;
+  }
+}
+
+export default MentorUserApi;
