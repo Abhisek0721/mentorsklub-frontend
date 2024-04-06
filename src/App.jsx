@@ -26,12 +26,12 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute />}>
+          <Route path="zoomAuthorized" element={<ZoomVerificationStatus />} />
           <Route element={<AppLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="notifications" element={<UserNotification />} />
             <Route path="messages" element={<UserMessage />} />
-            <Route path="zoomAuthorized" element={<ZoomVerificationStatus />} />
             <Route path="mentor">
               <Route path="mentor-profile" element={<MentorProfile />} />
               <Route path="session" element={<MentorSession />} />
