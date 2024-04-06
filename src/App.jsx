@@ -12,16 +12,15 @@ import MentorSession from "./pages/MentorSession";
 // import Mentor from "./pages/Mentor";
 import MenteProfile from "./pages/MenteeProfile";
 import MentorProfile from "./pages/MentorProfile";
-import { getUserRole } from "./utils/getUserDataFromBrowser";
 import ViewMentees from "./pages/ViewMentees";
 import SubscriptionForMentor from "./pages/SubscriptionForMentor";
 import SubscriptionForMentee from "./pages/SubscriptionForMentee";
 import UserNotification from "./pages/UserNotification";
 import UserMessage from "./pages/Message";
 import ZoomVerificationStatus from "./pages/ZoomAuthVerification";
+import Feedback from "./pages/Feedback";
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
@@ -37,6 +36,7 @@ function App() {
               <Route path="session" element={<MentorSession />} />
               <Route path="view-profile" element={<ViewMentorProfile />} />
               <Route path="subscription" element={<SubscriptionForMentor />} />
+              <Route path="feedback" element={<Feedback />} />
             </Route>
             <Route path="mentee">
               <Route path="mentee-profile" element={<MenteProfile />} />
