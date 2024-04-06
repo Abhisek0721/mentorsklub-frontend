@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 
 import toast, { Toaster } from "react-hot-toast";
 
-export default function MentorTable() {
+export default function Menteeviewsession() {
 
 
      const  CheckLiveStateofSession = (startDate, endDate) =>{
@@ -29,12 +29,6 @@ export default function MentorTable() {
     
 
     const text = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias reiciendis quisquam illum mollitia corporis."
-
-    const [showfull, setshowfull] = useState(false)
-
-    const handleClick = () => {
-        setshowfull(!showfull)
-    }
 
 
     return (
