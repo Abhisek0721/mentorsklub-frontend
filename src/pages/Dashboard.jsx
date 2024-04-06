@@ -12,7 +12,7 @@ const Dashboard = () => {
     try {
       let data = await MentorUserApi.checkZoomAuthStatus();
       if (data?.data) {
-        setShowConnectPrompt(data?.data?.status);
+        setShowConnectPrompt(!data?.data?.status);
       }
     } catch (error) {
       toast.error("Something went wrong");
