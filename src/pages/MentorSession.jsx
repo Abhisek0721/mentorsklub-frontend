@@ -1,7 +1,13 @@
+import CreateMeetingModal from "../components/CreateMeeting";
+import SessionTableOfMentor from "../components/SessionTableOfMentor";
+
 const MentorSession = () => {
   return (
-    <div>
-      <h1>MentorSession</h1>
+    <div className="heading1">
+      <div>
+        <CreateMeetingModal />
+      </div>
+      <SessionTableOfMentor />
     </div>
   );
 };

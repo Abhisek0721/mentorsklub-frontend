@@ -18,7 +18,7 @@ function ZoomVerificationStatus() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "80%", // Use full viewport height
+        height: "80vh", // Use full viewport height
       }}
     >
       {status === "true" ? (
