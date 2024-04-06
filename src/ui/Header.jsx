@@ -3,6 +3,7 @@ import logout from "../assets/svg/logout.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/feature/auth/authSlice";
 import { useNavigate } from "react-router-dom";
+import { getUserRole } from "../utils/getUserDataFromBrowser";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Header = () => {
           className="w-[2.2rem] h-[2.2rem] cursor-pointer"
           src={profile}
           alt=""
-          onClick={() => navigate("/profile")}
+          onClick={() => navigate(`/${getUserRole()}-profile`)}
         />
         <img
           className="w-[2.2rem] h-[2.2rem] cursor-pointer"
