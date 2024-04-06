@@ -30,7 +30,7 @@ const Sidebar = () => {
     {
       id: 3,
       pathName: "Subscription",
-      path: "/subscriptions",
+      path: "/subscriptions", // mentor can see all subscribed mentees
       icon: <NotificationsActiveOutlinedIcon fontSize="4xl" />,
     },
     {
@@ -42,7 +42,7 @@ const Sidebar = () => {
     {
       id: 6,
       pathName: "Sessions",
-      path: "/sessions",
+      path: "/sessions", // mentor can create session and view his own upcoming sessions
       icon: <ClassOutlinedIcon fontSize="4xl" />,
     },
     {
@@ -53,8 +53,8 @@ const Sidebar = () => {
     },
     {
       id: 7,
-      pathName: "Profile",
-      path: "/profile",
+      pathName: "MentorProfile",
+      path: "/mentor-profile", // mentor can view and edit his own profile
       icon: <PersonPinIcon fontSize="4xl" />,
     },
   ];
@@ -63,7 +63,13 @@ const Sidebar = () => {
     {
       id: 2,
       pathName: "Mentee",
-      path: "/mentees",
+      path: "/view-mentees", // mentee can see other mentees
+      icon: <PeopleOutlineOutlinedIcon fontSize="4xl" />,
+    },
+        {
+      id: 2,
+      pathName: "Mentor",
+      path: "/view-mentors", // mentee can see other mentors
       icon: <PeopleOutlineOutlinedIcon fontSize="4xl" />,
     },
     {
@@ -75,7 +81,7 @@ const Sidebar = () => {
     {
       id: 6,
       pathName: "Sessions",
-      path: "/sessions",
+      path: "/view-sessions", // mentee can see all live and upcoming sessions
       icon: <ClassOutlinedIcon fontSize="4xl" />,
     },
     {
@@ -86,8 +92,8 @@ const Sidebar = () => {
     },
     {
       id: 7,
-      pathName: "Profile",
-      path: "/profile",
+      pathName: "MentorViewProfile",
+      path: "/view-mentor-profile", // mentee can see mentor profile
       icon: <PersonPinIcon fontSize="4xl" />,
     },
   ];
