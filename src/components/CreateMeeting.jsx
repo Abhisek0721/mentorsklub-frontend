@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Button,
   Dialog,
@@ -9,9 +9,18 @@ import {
 } from "@mui/material";
 import SessionApi from "../redux/feature/session/sessionApi";
 import toast from "react-hot-toast";
+import LoadingButton from "@mui/lab/LoadingButton";
+import SaveIcon from "@mui/icons-material/Save";
+import { useSelector } from "react-redux";
 
 const CreateMeetingModal = () => {
+  const isAuthorize = useSelector((state) => state.zoomAuth.zoomAuth);
+
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [meetingName, setMeetingName] = useState("");
+  const [meetingDate, setMeetingDate] = useState("");
+  const [meetingTime, setMeetingTime] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -21,22 +30,29 @@ const CreateMeetingModal = () => {
     setOpen(false);
   };
 
-  const handleCreateMeeting = async (meetingTopic, meetingDateTime) => {
-    // Add your logic to create a meeting session
-    const isoDateString = meetingDateTime.replace(" ", "T");
-    const meetingDate = new Date(isoDateString);
+  const handleCreateMeeting = async () => {
+    if (isAuthorize) {
+      return toast.error("please authorize zoom account");
+    }
+    setLoading(true);
+    const isoDateString = `${meetingDate}T${meetingTime}`;
+    const meetingDateObj = new Date(isoDateString);
     const payload = {
-        "meetingTopic": meetingTopic,
-        "startTime": meetingDate,
-        "duration": 60
-    }
-    const data = await SessionApi.createSession(payload);
-    if(data?.message) {
+      meetingTopic: meetingName,
+      startTime: meetingDateObj,
+      duration: 60,
+    };
+    try {
+      const data = await SessionApi.createSession(payload);
+      if (data?.message) {
         toast.success("Session created successfully!");
-    }else{
-        toast.error(data?.message);
+        setLoading(false);
+        setOpen(false);
+      }
+    } catch (error) {
+      toast.error("Something went wrong");
+      setLoading(false);
     }
-    setOpen(false);
   };
 
   return (
@@ -59,6 +75,8 @@ const CreateMeetingModal = () => {
             label="Meeting Name"
             type="text"
             fullWidth
+            value={meetingName}
+            onChange={(e) => setMeetingName(e.target.value)}
             InputProps={{
               style: { fontSize: "1.6rem" },
             }}
@@ -72,6 +90,8 @@ const CreateMeetingModal = () => {
             label="Meeting Date"
             type="date"
             fullWidth
+            value={meetingDate}
+            onChange={(e) => setMeetingDate(e.target.value)}
             InputProps={{
               style: { fontSize: "1.6rem" },
             }}
@@ -86,6 +106,8 @@ const CreateMeetingModal = () => {
             label="Meeting Time"
             type="time"
             fullWidth
+            value={meetingTime}
+            onChange={(e) => setMeetingTime(e.target.value)}
             InputProps={{
               style: { fontSize: "1.6rem" },
             }}
@@ -103,20 +125,17 @@ const CreateMeetingModal = () => {
           >
             Cancel
           </Button>
-          <Button
-            onClick={() =>
-              handleCreateMeeting(
-                document.getElementById("meetingName").value,
-                document.getElementById("meetingDate").value +
-                  " " +
-                  document.getElementById("meetingTime").value
-              )
-            }
-            color="primary"
+
+          <LoadingButton
+            onClick={handleCreateMeeting}
             sx={{ fontSize: "1.3rem" }}
+            loading={loading}
+            loadingPosition="start"
+            startIcon={<SaveIcon />}
+            variant="outlined"
           >
             Create
-          </Button>
+          </LoadingButton>
         </DialogActions>
       </Dialog>
     </div>
