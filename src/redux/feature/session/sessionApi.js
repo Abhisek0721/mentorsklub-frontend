@@ -3,9 +3,11 @@ import axios from "axios";
 import constant from "../../../constants";
 
 class SessionApi {
-  static async getSessionsOfMentor() {
+  static async getSessionsOfMentor(page = 1) {
+    console.log(page, "from redx");
+
     const response = await axios.get(
-      `${constant.SERVER_URL}/api/mentor/session/get-all-sessions`,
+      `${constant.SERVER_URL}/api/mentor/session/get-all-sessions?pageNumber=${page}`,
       {
         headers: {
           Authorization: getAuthorizationString(),

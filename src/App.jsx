@@ -19,15 +19,24 @@ import UserNotification from "./pages/UserNotification";
 import UserMessage from "./pages/Message";
 import ZoomVerificationStatus from "./pages/ZoomAuthVerification";
 import Feedback from "./pages/Feedback";
+import { useSelector } from "react-redux";
 
 function App() {
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const userRole = userInfo?.userData?.role; // Mentor or Mentee
+  console.log(userRole);
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="zoomAuthorized" element={<ZoomVerificationStatus />} />
           <Route element={<AppLayout />}>
-            <Route index element={<Dashboard />} />
+            <Route
+              index
+              element={
+                userRole === "mentor" ? <MentorSession /> : <Dashboard />
+              }
+            />
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="notifications" element={<UserNotification />} />
             <Route path="messages" element={<UserMessage />} />

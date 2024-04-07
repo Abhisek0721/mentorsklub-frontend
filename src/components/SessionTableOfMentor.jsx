@@ -21,9 +21,10 @@ const SessionTableOfMentor = () => {
   const [pageData, setPageData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const pageSize = 13; // Change this as per your requirement
+  const pageSize = 13;
 
   const getAllSessionsOfMentor = async (page) => {
+    console.log(page);
     const data = await SessionApi.getSessionsOfMentor(page);
     console.log(page);
     if (data?.data) {
