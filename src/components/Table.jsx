@@ -5,21 +5,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper"; 
-import {useSelector} from 'react-redux'
+import Paper from "@mui/material/Paper";
 
 import toast, { Toaster } from "react-hot-toast";
 
 export default function MentorTable() {
-
-  const data = useSelector(state => state.page.data);
-  const currentPage = useSelector(state => state.page.currentPage);
-  const itemsPerPage = useSelector(state => state.page.itemsPerPage);
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const currentPageData = data.slice(startIndex, endIndex);
-  console.log(currentPageData)
   const [subscribe, setSubscribe] = useState(false);
 
   const handleSubscribed = () => {
@@ -61,8 +51,7 @@ export default function MentorTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {currentPageData?.map((item,index) =>(
-            <TableRow key={index}
+            <TableRow
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
               <TableCell style={{ width: "100px" }} component="th" scope="row">
                 <img
@@ -72,7 +61,7 @@ export default function MentorTable() {
                 />
               </TableCell>
               <TableCell align="center">
-                <span className="text-3xl">{item.mentorName}</span>
+                <span className="text-3xl">Reachi wilson</span>
               </TableCell>
               <TableCell align="center">
                 <span className="text-3xl">Nest.js with SQL</span>
@@ -96,7 +85,6 @@ export default function MentorTable() {
                 )}
               </TableCell>
             </TableRow>
-            ))}
           </TableBody>
         </Table>
       </TableContainer>

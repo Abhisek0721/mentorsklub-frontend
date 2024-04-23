@@ -6,8 +6,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Pagination from "@mui/material/Pagination";
 
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import SessionApi from "../redux/feature/session/sessionApi";
 import {
   formatTimestamp,
@@ -18,9 +19,14 @@ import {
 const SessionTableOfMentor = () => {
   const [mentorSessions, setMentorSessions] = useState(null);
   const [pageData, setPageData] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const getAllSessionsOfMentor = async () => {
-    const data = await SessionApi.getSessionsOfMentor();
+  const pageSize = 13;
+
+  const getAllSessionsOfMentor = async (page) => {
+    console.log(page);
+    const data = await SessionApi.getSessionsOfMentor(page);
+    console.log(page);
     if (data?.data) {
       setMentorSessions(data?.data?.data);
       setPageData(data?.page);
@@ -28,12 +34,17 @@ const SessionTableOfMentor = () => {
   };
 
   useEffect(() => {
-    getAllSessionsOfMentor();
-  }, []);
+    getAllSessionsOfMentor(currentPage);
+  }, [currentPage]);
 
   const handleSessionJoin = (meetingLink) => {
     window.open(meetingLink, "_blank");
-  }
+  };
+
+  const handleChangePage = (event, newPage) => {
+    console.log("hii");
+    setCurrentPage(newPage);
+  };
 
   return (
     <div className="max-w-full overflow-auto mt-10">
@@ -45,10 +56,7 @@ const SessionTableOfMentor = () => {
           <TableHead>
             <TableRow>
               <TableCell style={{ width: "120px" }}>
-                {" "}
-                <span className="text-3xl font-semibold">
-                  Meeting Topic
-                </span>{" "}
+                <span className="text-3xl font-semibold">Meeting Topic</span>
               </TableCell>
               <TableCell style={{ width: "150px" }} align="center">
                 <span className="text-3xl font-semibold">Meeting Platform</span>
@@ -98,13 +106,17 @@ const SessionTableOfMentor = () => {
                         eachSession?.endTime
                       ) ? (
                         <button
-                          onClick={() => handleSessionJoin(eachSession?.meetingLink)}
+                          onClick={() =>
+                            handleSessionJoin(eachSession?.meetingLink)
+                          }
                           className="w-28 py-3 rounded-sm font-semibold bg-[var(--color-brand-500)] text-[var(--color-grey-0)] text-xl tracking-[1px]"
                         >
                           Join
                         </button>
                       ) : (
-                        <span className="text-2xl bg-blue-200 rounded-full px-5 py-2">Upcoming...</span>
+                        <span className="text-2xl bg-blue-200 rounded-full px-5 py-2">
+                          Upcoming...
+                        </span>
                       )}
                     </TableCell>
                   </TableRow>
@@ -113,6 +125,18 @@ const SessionTableOfMentor = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      {pageData && (
+        <div className="mt-5 flex justify-center">
+          <Pagination
+            count={pageData?.records?.total}
+            page={currentPage}
+            onChange={handleChangePage}
+            color="primary"
+            size="large"
+            siblingCount={2}
+          />
+        </div>
+      )}
     </div>
   );
 };

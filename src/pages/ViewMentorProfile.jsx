@@ -1,31 +1,10 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { FaGithub, FaLinkedin, FaToolbox } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { useProfileMutation } from "../redux/feature/profileApi/profileApi";
 
 const ViewMentorProfile = () => {
   const lorem =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta voluptas architecto repellat ea autem a inventore numquam hic possimus praesentium excepturi corrupti neque similique minus recusandae, odio magnam illum delectus.";
-
-    const [getMentorProfile , {isgetMentorProfile,data,error }] = useProfileMutation()
-
-    const [token, setToken] = useState(null); 
-
-    useEffect(() => {
-      const usertoken = localStorage.getItem("token")
-      console.log(usertoken)
-      setToken(usertoken)
-      if(usertoken) fetchMentorProfileData();
-    }, [token]);
-    
-      function fetchMentorProfileData(){
-        getMentorProfile ({ headers: { Authorization: `Bearer ${token}` } })
-        console.log(data)
-      }
-      console.log(error)
-      
-    
-    
 
 
   const [subscribe, setsubscribe] = useState(true);

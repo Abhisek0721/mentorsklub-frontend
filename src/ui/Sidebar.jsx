@@ -7,7 +7,7 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import PeopleOutlineOutlinedIcon from "@mui/icons-material/PeopleOutlineOutlined";
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import { useSelector } from "react-redux";
-
+import FeedbackIcon from "@mui/icons-material/Feedback";
 const Sidebar = () => {
   const { pathname } = useLocation();
   const userInfo = useSelector((state) => state.auth.userInfo);
@@ -49,6 +49,12 @@ const Sidebar = () => {
       path: "/mentor/mentor-profile", // mentor can view and edit his own profile
       icon: <PersonPinIcon fontSize="4xl" />,
     },
+    {
+      id: 7,
+      pathName: "Feedback",
+      path: "/mentor/feedback", // mentor can view and edit his own profile
+      icon: <FeedbackIcon fontSize="4xl" />,
+    },
   ];
 
   const menteePaths = [
@@ -87,6 +93,12 @@ const Sidebar = () => {
       pathName: "Notification",
       path: "/notifications",
       icon: <NotificationsNoneOutlinedIcon fontSize="4xl" />,
+    },
+    {
+      id: 7,
+      pathName: "Feedback",
+      path: "/mentor/feedback", // mentor can view and edit his own profile
+      icon: <FeedbackIcon fontSize="4xl" />,
     },
   ];
 
